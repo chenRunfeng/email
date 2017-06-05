@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.ApplicantMapper" >
+  <resultMap id="BaseResultMap" type="model.Applicant" >
+    <id column="apply_id" property="applyId" jdbcType="VARCHAR" />
+    <result column="p_name" property="pName" jdbcType="VARCHAR" />
+    <result column="p_sex" property="pSex" jdbcType="VARCHAR" />
+    <result column="p_age" property="pAge" jdbcType="NUMERIC" />
+    <result column="p_blood" property="pBlood" jdbcType="VARCHAR" />
+    <result column="p_num" property="pNum" jdbcType="NUMERIC" />
+    <result column="p_keshi" property="pKeshi" jdbcType="VARCHAR" />
+    <result column="p_allergy" property="pAllergy" jdbcType="VARCHAR" />
+    <result column="p_area" property="pArea" jdbcType="VARCHAR" />
+    <result column="p_illness" property="pIllness" jdbcType="VARCHAR" />
+    <result column="p_appendix" property="pAppendix" jdbcType="VARCHAR" />
+    <result column="applicant" property="applicant" jdbcType="VARCHAR" />
+    <result column="a_keshi" property="aKeshi" jdbcType="VARCHAR" />
+    <result column="a_time" property="aTime" jdbcType="TIMESTAMP" />
+    <result column="a_doctor" property="aDoctor" jdbcType="VARCHAR" />
+    <result column="a_detail" property="aDetail" jdbcType="VARCHAR" />
+    <result column="add_userid" property="addUserid" jdbcType="VARCHAR" />
+    <result column="add_date" property="addDate" jdbcType="TIMESTAMP" />
+    <result column="modify_userid" property="modifyUserid" jdbcType="VARCHAR" />
+    <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="a_type" property="aType" jdbcType="NUMERIC" />
+    <result column="a_type2" property="aType2" jdbcType="VARCHAR" />
+    <result column="a_status" property="aStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    apply_id, p_name, p_sex, p_age, p_blood, p_num, p_keshi, p_allergy, p_area, p_illness, 
+    p_appendix, applicant, a_keshi, a_time, a_doctor, a_detail, add_userid, add_date, 
+    modify_userid, modify_date, a_type, a_type2, a_status
+  </sql>
+  <select id="selectbyfield" resultMap="BaseResultMap" parameterType="java.lang.String">
+  select
+      <include refid="Base_Column_List" />
+      from applicnt
+      where #{field}=#{value,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from applicant
+    where apply_id = #{applyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from applicant
+    where apply_id = #{applyId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="model.Applicant" >
+    insert into applicant (apply_id, p_name, p_sex, 
+      p_age, p_blood, p_num, 
+      p_keshi, p_allergy, p_area, 
+      p_illness, p_appendix, applicant, 
+      a_keshi, a_time, a_doctor, 
+      a_detail, add_userid, add_date, 
+      modify_userid, modify_date, a_type, 
+      a_type2, a_status)
+    values (#{applyId,jdbcType=VARCHAR}, #{pName,jdbcType=VARCHAR}, #{pSex,jdbcType=VARCHAR}, 
+      #{pAge,jdbcType=NUMERIC}, #{pBlood,jdbcType=VARCHAR}, #{pNum,jdbcType=NUMERIC}, 
+      #{pKeshi,jdbcType=VARCHAR}, #{pAllergy,jdbcType=VARCHAR}, #{pArea,jdbcType=VARCHAR}, 
+      #{pIllness,jdbcType=VARCHAR}, #{pAppendix,jdbcType=VARCHAR}, #{applicant,jdbcType=VARCHAR}, 
+      #{aKeshi,jdbcType=VARCHAR}, #{aTime,jdbcType=TIMESTAMP}, #{aDoctor,jdbcType=VARCHAR}, 
+      #{aDetail,jdbcType=VARCHAR}, #{addUserid,jdbcType=VARCHAR}, #{addDate,jdbcType=TIMESTAMP}, 
+      #{modifyUserid,jdbcType=VARCHAR}, #{modifyDate,jdbcType=TIMESTAMP}, #{aType,jdbcType=NUMERIC}, 
+      #{aType2,jdbcType=VARCHAR}, #{aStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="model.Applicant" >
+    insert into applicant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="applyId != null" >
+        apply_id,
+      </if>
+      <if test="pName != null" >
+        p_name,
+      </if>
+      <if test="pSex != null" >
+        p_sex,
+      </if>
+      <if test="pAge != null" >
+        p_age,
+      </if>
+      <if test="pBlood != null" >
+        p_blood,
+      </if>
+      <if test="pNum != null" >
+        p_num,
+      </if>
+      <if test="pKeshi != null" >
+        p_keshi,
+      </if>
+      <if test="pAllergy != null" >
+        p_allergy,
+      </if>
+      <if test="pArea != null" >
+        p_area,
+      </if>
+      <if test="pIllness != null" >
+        p_illness,
+      </if>
+      <if test="pAppendix != null" >
+        p_appendix,
+      </if>
+      <if test="applicant != null" >
+        applicant,
+      </if>
+      <if test="aKeshi != null" >
+        a_keshi,
+      </if>
+      <if test="aTime != null" >
+        a_time,
+      </if>
+      <if test="aDoctor != null" >
+        a_doctor,
+      </if>
+      <if test="aDetail != null" >
+        a_detail,
+      </if>
+      <if test="addUserid != null" >
+        add_userid,
+      </if>
+      <if test="addDate != null" >
+        add_date,
+      </if>
+      <if test="modifyUserid != null" >
+        modify_userid,
+      </if>
+      <if test="modifyDate != null" >
+        modify_date,
+      </if>
+      <if test="aType != null" >
+        a_type,
+      </if>
+      <if test="aType2 != null" >
+        a_type2,
+      </if>
+      <if test="aStatus != null" >
+        a_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="applyId != null" >
+        #{applyId,jdbcType=VARCHAR},
+      </if>
+      <if test="pName != null" >
+        #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pSex != null" >
+        #{pSex,jdbcType=VARCHAR},
+      </if>
+      <if test="pAge != null" >
+        #{pAge,jdbcType=NUMERIC},
+      </if>
+      <if test="pBlood != null" >
+        #{pBlood,jdbcType=VARCHAR},
+      </if>
+      <if test="pNum != null" >
+        #{pNum,jdbcType=NUMERIC},
+      </if>
+      <if test="pKeshi != null" >
+        #{pKeshi,jdbcType=VARCHAR},
+      </if>
+      <if test="pAllergy != null" >
+        #{pAllergy,jdbcType=VARCHAR},
+      </if>
+      <if test="pArea != null" >
+        #{pArea,jdbcType=VARCHAR},
+      </if>
+      <if test="pIllness != null" >
+        #{pIllness,jdbcType=VARCHAR},
+      </if>
+      <if test="pAppendix != null" >
+        #{pAppendix,jdbcType=VARCHAR},
+      </if>
+      <if test="applicant != null" >
+        #{applicant,jdbcType=VARCHAR},
+      </if>
+      <if test="aKeshi != null" >
+        #{aKeshi,jdbcType=VARCHAR},
+      </if>
+      <if test="aTime != null" >
+        #{aTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aDoctor != null" >
+        #{aDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="aDetail != null" >
+        #{aDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="addUserid != null" >
+        #{addUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="addDate != null" >
+        #{addDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserid != null" >
+        #{modifyUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aType != null" >
+        #{aType,jdbcType=NUMERIC},
+      </if>
+      <if test="aType2 != null" >
+        #{aType2,jdbcType=VARCHAR},
+      </if>
+      <if test="aStatus != null" >
+        #{aStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.Applicant" >
+    update applicant
+    <set >
+      <if test="pName != null" >
+        p_name = #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pSex != null" >
+        p_sex = #{pSex,jdbcType=VARCHAR},
+      </if>
+      <if test="pAge != null" >
+        p_age = #{pAge,jdbcType=NUMERIC},
+      </if>
+      <if test="pBlood != null" >
+        p_blood = #{pBlood,jdbcType=VARCHAR},
+      </if>
+      <if test="pNum != null" >
+        p_num = #{pNum,jdbcType=NUMERIC},
+      </if>
+      <if test="pKeshi != null" >
+        p_keshi = #{pKeshi,jdbcType=VARCHAR},
+      </if>
+      <if test="pAllergy != null" >
+        p_allergy = #{pAllergy,jdbcType=VARCHAR},
+      </if>
+      <if test="pArea != null" >
+        p_area = #{pArea,jdbcType=VARCHAR},
+      </if>
+      <if test="pIllness != null" >
+        p_illness = #{pIllness,jdbcType=VARCHAR},
+      </if>
+      <if test="pAppendix != null" >
+        p_appendix = #{pAppendix,jdbcType=VARCHAR},
+      </if>
+      <if test="applicant != null" >
+        applicant = #{applicant,jdbcType=VARCHAR},
+      </if>
+      <if test="aKeshi != null" >
+        a_keshi = #{aKeshi,jdbcType=VARCHAR},
+      </if>
+      <if test="aTime != null" >
+        a_time = #{aTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aDoctor != null" >
+        a_doctor = #{aDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="aDetail != null" >
+        a_detail = #{aDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="addUserid != null" >
+        add_userid = #{addUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="addDate != null" >
+        add_date = #{addDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserid != null" >
+        modify_userid = #{modifyUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyDate != null" >
+        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aType != null" >
+        a_type = #{aType,jdbcType=NUMERIC},
+      </if>
+      <if test="aType2 != null" >
+        a_type2 = #{aType2,jdbcType=VARCHAR},
+      </if>
+      <if test="aStatus != null" >
+        a_status = #{aStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where apply_id = #{applyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.Applicant" >
+    update applicant
+    set p_name = #{pName,jdbcType=VARCHAR},
+      p_sex = #{pSex,jdbcType=VARCHAR},
+      p_age = #{pAge,jdbcType=NUMERIC},
+      p_blood = #{pBlood,jdbcType=VARCHAR},
+      p_num = #{pNum,jdbcType=NUMERIC},
+      p_keshi = #{pKeshi,jdbcType=VARCHAR},
+      p_allergy = #{pAllergy,jdbcType=VARCHAR},
+      p_area = #{pArea,jdbcType=VARCHAR},
+      p_illness = #{pIllness,jdbcType=VARCHAR},
+      p_appendix = #{pAppendix,jdbcType=VARCHAR},
+      applicant = #{applicant,jdbcType=VARCHAR},
+      a_keshi = #{aKeshi,jdbcType=VARCHAR},
+      a_time = #{aTime,jdbcType=TIMESTAMP},
+      a_doctor = #{aDoctor,jdbcType=VARCHAR},
+      a_detail = #{aDetail,jdbcType=VARCHAR},
+      add_userid = #{addUserid,jdbcType=VARCHAR},
+      add_date = #{addDate,jdbcType=TIMESTAMP},
+      modify_userid = #{modifyUserid,jdbcType=VARCHAR},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      a_type = #{aType,jdbcType=NUMERIC},
+      a_type2 = #{aType2,jdbcType=VARCHAR},
+      a_status = #{aStatus,jdbcType=VARCHAR}
+    where apply_id = #{applyId,jdbcType=VARCHAR}
+  </update>
+</mapper>

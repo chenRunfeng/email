@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.ExpertdetailMapper" >
+  <resultMap id="BaseResultMap" type="model.Expertdetail" >
+    <id column="expertdetail_id" property="expertdetailId" jdbcType="VARCHAR" />
+    <result column="ename" property="ename" jdbcType="VARCHAR" />
+    <result column="jobnumber" property="jobnumber" jdbcType="VARCHAR" />
+    <result column="eemail" property="eemail" jdbcType="VARCHAR" />
+    <result column="add_userid" property="addUserid" jdbcType="VARCHAR" />
+    <result column="add_date" property="addDate" jdbcType="TIMESTAMP" />
+    <result column="modify_userid" property="modifyUserid" jdbcType="VARCHAR" />
+    <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="expertinfo_id" property="expertinfoId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    expertdetail_id, ename, jobnumber, eemail, add_userid, add_date, modify_userid, modify_date, 
+    expertinfo_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from expertdetail
+    where expertdetail_id = #{expertdetailId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from expertdetail
+    where expertdetail_id = #{expertdetailId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="model.Expertdetail" >
+    insert into expertdetail (expertdetail_id, ename, jobnumber, 
+      eemail, add_userid, add_date, 
+      modify_userid, modify_date, expertinfo_id
+      )
+    values (#{expertdetailId,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR}, #{jobnumber,jdbcType=VARCHAR}, 
+      #{eemail,jdbcType=VARCHAR}, #{addUserid,jdbcType=VARCHAR}, #{addDate,jdbcType=TIMESTAMP}, 
+      #{modifyUserid,jdbcType=VARCHAR}, #{modifyDate,jdbcType=TIMESTAMP}, #{expertinfoId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.Expertdetail" >
+    insert into expertdetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="expertdetailId != null" >
+        expertdetail_id,
+      </if>
+      <if test="ename != null" >
+        ename,
+      </if>
+      <if test="jobnumber != null" >
+        jobnumber,
+      </if>
+      <if test="eemail != null" >
+        eemail,
+      </if>
+      <if test="addUserid != null" >
+        add_userid,
+      </if>
+      <if test="addDate != null" >
+        add_date,
+      </if>
+      <if test="modifyUserid != null" >
+        modify_userid,
+      </if>
+      <if test="modifyDate != null" >
+        modify_date,
+      </if>
+      <if test="expertinfoId != null" >
+        expertinfo_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="expertdetailId != null" >
+        #{expertdetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="ename != null" >
+        #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="jobnumber != null" >
+        #{jobnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="eemail != null" >
+        #{eemail,jdbcType=VARCHAR},
+      </if>
+      <if test="addUserid != null" >
+        #{addUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="addDate != null" >
+        #{addDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserid != null" >
+        #{modifyUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expertinfoId != null" >
+        #{expertinfoId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.Expertdetail" >
+    update expertdetail
+    <set >
+      <if test="ename != null" >
+        ename = #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="jobnumber != null" >
+        jobnumber = #{jobnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="eemail != null" >
+        eemail = #{eemail,jdbcType=VARCHAR},
+      </if>
+      <if test="addUserid != null" >
+        add_userid = #{addUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="addDate != null" >
+        add_date = #{addDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserid != null" >
+        modify_userid = #{modifyUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyDate != null" >
+        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expertinfoId != null" >
+        expertinfo_id = #{expertinfoId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where expertdetail_id = #{expertdetailId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.Expertdetail" >
+    update expertdetail
+    set ename = #{ename,jdbcType=VARCHAR},
+      jobnumber = #{jobnumber,jdbcType=VARCHAR},
+      eemail = #{eemail,jdbcType=VARCHAR},
+      add_userid = #{addUserid,jdbcType=VARCHAR},
+      add_date = #{addDate,jdbcType=TIMESTAMP},
+      modify_userid = #{modifyUserid,jdbcType=VARCHAR},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      expertinfo_id = #{expertinfoId,jdbcType=VARCHAR}
+    where expertdetail_id = #{expertdetailId,jdbcType=VARCHAR}
+  </update>
+</mapper>

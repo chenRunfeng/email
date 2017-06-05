@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.EmailMapper" >
+  <resultMap id="BaseResultMap" type="model.Email" >
+    <id column="TEMPLATE_ID" property="templateId" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_TAG" property="templateTag" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_NAME" property="templateName" jdbcType="VARCHAR" />
+    <result column="FUN_ID" property="funId" jdbcType="VARCHAR" />
+    <result column="IS_DEFAULT" property="isDefault" jdbcType="CHAR" />
+    <result column="IS_ATTACH" property="isAttach" jdbcType="CHAR" />
+    <result column="FUN_NAME" property="funName" jdbcType="VARCHAR" />
+    <result column="ADD_USERID" property="addUserid" jdbcType="VARCHAR" />
+    <result column="ADD_DATE" property="addDate" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_USERID" property="modifyUserid" jdbcType="VARCHAR" />
+    <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="model.Email" extends="BaseResultMap" >
+    <result column="TEMPLATE_CONT" property="templateCont" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TEMPLATE_ID, TEMPLATE_TAG, TEMPLATE_NAME, FUN_ID, IS_DEFAULT, IS_ATTACH, FUN_NAME, 
+    ADD_USERID, ADD_DATE, MODIFY_USERID, MODIFY_DATE
+  </sql>
+  <sql id="Blob_Column_List" >
+    TEMPLATE_CONT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from MAIL_TEMPLATE
+    where TEMPLATE_ID = #{templateId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from MAIL_TEMPLATE
+    where TEMPLATE_ID = #{templateId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="model.Email" >
+    insert into MAIL_TEMPLATE (TEMPLATE_ID, TEMPLATE_TAG, TEMPLATE_NAME, 
+      FUN_ID, IS_DEFAULT, IS_ATTACH, 
+      FUN_NAME, ADD_USERID, ADD_DATE, 
+      MODIFY_USERID, MODIFY_DATE, TEMPLATE_CONT
+      )
+    values (#{templateId,jdbcType=VARCHAR}, #{templateTag,jdbcType=VARCHAR}, #{templateName,jdbcType=VARCHAR}, 
+      #{funId,jdbcType=VARCHAR}, #{isDefault,jdbcType=CHAR}, #{isAttach,jdbcType=CHAR}, 
+      #{funName,jdbcType=VARCHAR}, #{addUserid,jdbcType=VARCHAR}, #{addDate,jdbcType=TIMESTAMP}, 
+      #{modifyUserid,jdbcType=VARCHAR}, #{modifyDate,jdbcType=TIMESTAMP}, #{templateCont,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.Email" >
+    insert into MAIL_TEMPLATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="templateId != null" >
+        TEMPLATE_ID,
+      </if>
+      <if test="templateTag != null" >
+        TEMPLATE_TAG,
+      </if>
+      <if test="templateName != null" >
+        TEMPLATE_NAME,
+      </if>
+      <if test="funId != null" >
+        FUN_ID,
+      </if>
+      <if test="isDefault != null" >
+        IS_DEFAULT,
+      </if>
+      <if test="isAttach != null" >
+        IS_ATTACH,
+      </if>
+      <if test="funName != null" >
+        FUN_NAME,
+      </if>
+      <if test="addUserid != null" >
+        ADD_USERID,
+      </if>
+      <if test="addDate != null" >
+        ADD_DATE,
+      </if>
+      <if test="modifyUserid != null" >
+        MODIFY_USERID,
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE,
+      </if>
+      <if test="templateCont != null" >
+        TEMPLATE_CONT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="templateId != null" >
+        #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="templateTag != null" >
+        #{templateTag,jdbcType=VARCHAR},
+      </if>
+      <if test="templateName != null" >
+        #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="funId != null" >
+        #{funId,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null" >
+        #{isDefault,jdbcType=CHAR},
+      </if>
+      <if test="isAttach != null" >
+        #{isAttach,jdbcType=CHAR},
+      </if>
+      <if test="funName != null" >
+        #{funName,jdbcType=VARCHAR},
+      </if>
+      <if test="addUserid != null" >
+        #{addUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="addDate != null" >
+        #{addDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserid != null" >
+        #{modifyUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="templateCont != null" >
+        #{templateCont,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.Email" >
+    update MAIL_TEMPLATE
+    <set >
+      <if test="templateTag != null" >
+        TEMPLATE_TAG = #{templateTag,jdbcType=VARCHAR},
+      </if>
+      <if test="templateName != null" >
+        TEMPLATE_NAME = #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="funId != null" >
+        FUN_ID = #{funId,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null" >
+        IS_DEFAULT = #{isDefault,jdbcType=CHAR},
+      </if>
+      <if test="isAttach != null" >
+        IS_ATTACH = #{isAttach,jdbcType=CHAR},
+      </if>
+      <if test="funName != null" >
+        FUN_NAME = #{funName,jdbcType=VARCHAR},
+      </if>
+      <if test="addUserid != null" >
+        ADD_USERID = #{addUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="addDate != null" >
+        ADD_DATE = #{addDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserid != null" >
+        MODIFY_USERID = #{modifyUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="templateCont != null" >
+        TEMPLATE_CONT = #{templateCont,jdbcType=CLOB},
+      </if>
+    </set>
+    where TEMPLATE_ID = #{templateId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="model.Email" >
+    update MAIL_TEMPLATE
+    set TEMPLATE_TAG = #{templateTag,jdbcType=VARCHAR},
+      TEMPLATE_NAME = #{templateName,jdbcType=VARCHAR},
+      FUN_ID = #{funId,jdbcType=VARCHAR},
+      IS_DEFAULT = #{isDefault,jdbcType=CHAR},
+      IS_ATTACH = #{isAttach,jdbcType=CHAR},
+      FUN_NAME = #{funName,jdbcType=VARCHAR},
+      ADD_USERID = #{addUserid,jdbcType=VARCHAR},
+      ADD_DATE = #{addDate,jdbcType=TIMESTAMP},
+      MODIFY_USERID = #{modifyUserid,jdbcType=VARCHAR},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      TEMPLATE_CONT = #{templateCont,jdbcType=CLOB}
+    where TEMPLATE_ID = #{templateId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.Email" >
+    update MAIL_TEMPLATE
+    set TEMPLATE_TAG = #{templateTag,jdbcType=VARCHAR},
+      TEMPLATE_NAME = #{templateName,jdbcType=VARCHAR},
+      FUN_ID = #{funId,jdbcType=VARCHAR},
+      IS_DEFAULT = #{isDefault,jdbcType=CHAR},
+      IS_ATTACH = #{isAttach,jdbcType=CHAR},
+      FUN_NAME = #{funName,jdbcType=VARCHAR},
+      ADD_USERID = #{addUserid,jdbcType=VARCHAR},
+      ADD_DATE = #{addDate,jdbcType=TIMESTAMP},
+      MODIFY_USERID = #{modifyUserid,jdbcType=VARCHAR},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+    where TEMPLATE_ID = #{templateId,jdbcType=VARCHAR}
+  </update>
+</mapper>
